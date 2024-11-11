@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q2</title>
+    <link rel="icon" href="/assets/images/logo.png" />
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #121212;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      p {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+        color: #ff4d4d;
+      }
+
+      .container {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+        width: 80%;
+        margin: 15px auto;
+      }
+
+      .line {
+        width: 80%;
+        margin: 0 auto;
+        border: 1px solid white;
+        border-radius: 5px;
+      }
+
+      .card {
+        width: 10vw;
+        height: 2vw;
+        background-color: white;
+        border-radius: 5px;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 1rem;
+        margin: 15px auto;
+      }
+
+      button {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* button:hover {
+        background-color: #ff4d4d;
+      } */
+    </style>
+  </head>
+  <body>
+    <p>JavaScript Knight Rider</p>
+
+    <div class="line"></div>
+
+    <div class="container">
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="button-container">
+      <button id="startBtn">Start</button>
+      <button id="stopBtn">Stop</button>
+    </div>
+
+    <!-- <script>
+      let isRunning = false;
+      let intervalId;
+      let currentIndex = 0;
+      let direction = 1;
+      const audio = new Audio('https://www.soundboard.com/mediafiles/mz/Mzg2MDMxNTIzMzg2MDM3_JzthsfvUY24.MP3');
+      
+      // Define the colors for animation
+      const colors = [
+        "#ff0000",  // Pure red
+        "#ff3333",  // Lighter red
+        "#ff6666",  // Even lighter red 
+        "#ff9999",  // Lightest red
+        "white"     // White
+      ];
+
+      startBtn.onclick = function() {
+        if (!isRunning) {
+          audio.play();
+          audio.loop = true;
+          currentIndex = 0;
+          
+          intervalId = setInterval(function() {
+            let cards = document.getElementsByClassName("card");
+            
+            // Reset all cards to default white
+            for (let i = 0; i < cards.length; i++) {
+              cards[i].style.backgroundColor = "white";
+            }
+
+            if (direction === 1) {
+              // Moving right - show color sequence leading up to current position
+              for (let i = 0; i <= currentIndex; i++) {
+                cards[i].style.backgroundColor = colors[i];
+              }
+              
+              currentIndex++;
+              if (currentIndex >= cards.length) {
+                direction = -1;
+                currentIndex = cards.length - 1;
+              }
+            } else {
+              // Moving left - show only the red color moving left
+              cards[currentIndex].style.backgroundColor = colors[0]; // Always pure red
+              
+              currentIndex--;
+              if (currentIndex < 0) {
+                direction = 1;
+                currentIndex = 0;
+              }
+            }
+
+          }, 1000);
+
+          isRunning = true;
+          startBtn.style.backgroundColor = "#ff4d4d";
+          stopBtn.style.backgroundColor = "white";
+        }
+      };
+
+      stopBtn.onclick = function() {
+        if (isRunning) {
+          clearInterval(intervalId);
+          audio.pause();
+          audio.currentTime = 0;
+          
+          // Reset all cards to white
+          let cards = document.getElementsByClassName("card");
+          for (let i = 0; i < cards.length; i++) {
+            cards[i].style.backgroundColor = "white";
+          }
+          
+          isRunning = false;
+          direction = 1;
+          currentIndex = 0;
+          stopBtn.style.backgroundColor = "#ff4d4d";
+          startBtn.style.backgroundColor = "white";
+        }
+      };
+    </script> -->
+    <!-- JS -->
+    <script>
+      let isRunning = false;
+      let intervalId;
+      let currentIndex = 0;
+      let direction = 1;
+
+      startBtn.onclick = function () {
+        if (!isRunning) {
+          intervalId = setInterval(function () {
+            let cards = document.getElementsByClassName("card");
+            for (let i = 0; i < cards.length; i++) {
+              cards[i].style.backgroundColor = "white";
+            }
+
+            cards[currentIndex].style.backgroundColor = "#ff4d4d";
+            if (currentIndex > 0) {
+              cards[currentIndex - 1].style.backgroundColor = "#ff9f9e";
+            }
+            if (currentIndex < cards.length - 1) {
+              cards[currentIndex + 1].style.backgroundColor = "#ff9f9e";
+            }
+
+            currentIndex = currentIndex + direction;
+            if (currentIndex >= cards.length - 1) {
+              direction = -1;
+            } else if (currentIndex <= 0) {
+              direction = 1;
+            }
+          }, 150);
+
+          isRunning = true;
+          startBtn.style.backgroundColor = "#ff4d4d";
+          stopBtn.style.backgroundColor = "white";
+        }
+      };
+
+      stopBtn.onclick = function () {
+        if (isRunning) {
+          clearInterval(intervalId);
+          isRunning = false;
+          stopBtn.style.backgroundColor = "#ff4d4d";
+          startBtn.style.backgroundColor = "white";
+        }
+      };
+    </script>
+  </body>
+</html>
